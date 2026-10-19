@@ -1,0 +1,43 @@
+<section class="section">
+  <div class="container container--narrow">
+    <h1 class="section__title">Votre panier</h1>
+
+    {% if cart.item_count > 0 %}
+      <form action="{{ routes.cart_url }}" method="post">
+        <ul class="cart">
+          {% for item in cart.items %}
+            <li class="cart__item">
+              <a class="cart__thumb" href="{{ item.url }}">
+                {% if item.image %}{{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: item.product.title }}{% endif %}
+              </a>
+              <div>
+                <a class="cart__title" href="{{ item.url }}">{{ item.product.title }}</a>
+                {% unless item.product.has_only_default_variant %}<p class="muted">{{ item.variant.title }}</p>{% endunless %}
+                <p>{{ item.final_price | money }}</p>
+                <label class="visually-hidden" for="qty-{{ item.index }}">Quantité</label>
+                <input class="cart__qty" id="qty-{{ item.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+              </div>
+              <p class="cart__line">{{ item.final_line_price | money }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+        <p class="cart__total">Sous-total : <strong>{{ cart.total_price | money }}</strong></p>
+        <p class="muted cart__note">Taxes et frais de livraison calculés au paiement.</p>
+        <div class="cart__actions">
+          <button class="button button--outline" type="submit" name="update">Mettre à jour</button>
+          <button class="button" type="submit" name="checkout">Paiement</button>
+        </div>
+      </form>
+    {% else %}
+      <p class="center">Votre panier est vide.</p>
+      <p class="center"><a class="button" href="{{ routes.all_products_collection_url }}">Continuer mes achats</a></p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Panier",
+  "settings": []
+}
+{% endschema %}

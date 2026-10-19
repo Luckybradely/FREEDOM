@@ -1,0 +1,25 @@
+<section class="section section--tight">
+  <div class="container split">
+    {% for i in (1..2) %}
+      {%- assign key = 'image_' | append: i -%}
+      <div class="split__item">
+        {% if section.settings[key] != blank %}
+          {{ section.settings[key] | image_url: width: 1200 | image_tag: loading: 'lazy', alt: '', sizes: '(min-width: 750px) 50vw, 100vw' }}
+        {% else %}
+          <span class="placeholder" aria-hidden="true"></span>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Deux images",
+  "settings": [
+    { "type": "image_picker", "id": "image_1", "label": "Image gauche" },
+    { "type": "image_picker", "id": "image_2", "label": "Image droite" }
+  ],
+  "presets": [{ "name": "Deux images" }]
+}
+{% endschema %}

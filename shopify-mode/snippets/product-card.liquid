@@ -1,0 +1,32 @@
+{%- comment -%}
+  Carte produit. Usage : {% render 'product-card', product: product, badge: 'Best-seller' %}
+  Le badge s'affiche si le produit porte le tag « best-seller ».
+{%- endcomment -%}
+<div class="card">
+  <a class="card__media" href="{{ product.url }}">
+    {% if product.featured_media %}
+      {{ product.featured_media | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title, sizes: '(min-width: 750px) 25vw, 50vw' }}
+    {% else %}
+      <span class="placeholder" aria-hidden="true"></span>
+    {% endif %}
+    {% if badge != blank and product.tags contains 'best-seller' %}<span class="badge">{{ badge }}</span>{% endif %}
+  </a>
+  <a class="card__title" href="{{ product.url }}">{{ product.title }}</a>
+  <p class="card__price">
+    {{ product.price | money }}
+    {% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}
+  </p>
+
+  {%- for option in product.options_with_values -%}
+    {%- assign option_name = option.name | downcase -%}
+    {%- if option_name contains 'coul' or option_name contains 'color' or option_name contains 'teinte' or option_name contains 'shade' -%}
+      <ul class="card__swatches" aria-label="{{ option.name }}">
+        {%- for value in option.values limit: 7 -%}
+          <li class="swatch swatch--sm" style="--swatch: {{ value.swatch.color | default: '#ccc' }}" title="{{ value }}"></li>
+        {%- endfor -%}
+        {%- if option.values.size > 7 -%}<li class="card__more">+{{ option.values.size | minus: 7 }}</li>{%- endif -%}
+      </ul>
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+</div>

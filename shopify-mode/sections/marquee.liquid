@@ -1,0 +1,21 @@
+{%- capture items -%}
+  {%- for block in section.blocks -%}<span {{ block.shopify_attributes }}>{{ block.settings.text }}</span><span aria-hidden="true">✨</span>{%- endfor -%}
+{%- endcapture -%}
+<div class="container">
+  <div class="marquee" aria-label="Informations">
+    <div class="marquee__track">
+      <div class="marquee__group">{{ items }}</div>
+      <div class="marquee__group" aria-hidden="true">{{ items }}</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bandeau défilant",
+  "blocks": [
+    { "type": "item", "name": "Message", "settings": [ { "type": "inline_richtext", "id": "text", "label": "Texte", "default": "RETOURS GRATUITS" } ] }
+  ],
+  "presets": [{ "name": "Bandeau défilant" }]
+}
+{% endschema %}

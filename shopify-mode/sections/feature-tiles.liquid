@@ -1,0 +1,34 @@
+<section class="section section--tight">
+  <div class="container tiles">
+    {% for block in section.blocks %}
+      <div class="tile" {{ block.shopify_attributes }}>
+        {% if block.settings.image != blank %}
+          {{ block.settings.image | image_url: width: 700 | image_tag: loading: 'lazy', alt: '', sizes: '(min-width: 750px) 25vw, 50vw' }}
+        {% else %}
+          <span class="placeholder" aria-hidden="true"></span>
+        {% endif %}
+        <div class="tile__text">
+          <span>{{ forloop.index }}.</span>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Tuiles numérotées",
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tuile",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "VOTRE ATOUT" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Tuiles numérotées" }]
+}
+{% endschema %}

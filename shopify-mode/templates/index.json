@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "banner": { "type": "image-banner", "settings": { "heading": "LA NOUVELLE\nCOLLECTION", "button_label": "Découvrir", "button_link": "shopify://collections/all" } },
+    "marquee": {
+      "type": "marquee",
+      "blocks": {
+        "m1": { "type": "item", "settings": { "text": "RETOURS GRATUITS" } },
+        "m2": { "type": "item", "settings": { "text": "3 ACHETÉS, LE 4E <strong>OFFERT</strong>" } },
+        "m3": { "type": "item", "settings": { "text": "LIVRAISON OFFERTE DÈS 60 €" } }
+      },
+      "block_order": ["m1", "m2", "m3"]
+    },
+    "featured": { "type": "featured-collection", "settings": { "heading": "NOS BEST-SELLERS" } },
+    "tiles": {
+      "type": "feature-tiles",
+      "blocks": {
+        "t1": { "type": "tile", "settings": { "text": "EFFET SECONDE PEAU" } },
+        "t2": { "type": "tile", "settings": { "text": "DOUBLURE THERMIQUE" } },
+        "t3": { "type": "tile", "settings": { "text": "RÉSISTANT ET DURABLE" } },
+        "t4": { "type": "tile", "settings": { "text": "COUPE QUI SCULPTE" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"]
+    },
+    "split": { "type": "image-split", "settings": {} },
+    "reviews": { "type": "reviews", "settings": {} }
+  },
+  "order": ["banner", "marquee", "featured", "tiles", "split", "reviews"]
+}

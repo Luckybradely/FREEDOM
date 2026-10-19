@@ -1,0 +1,27 @@
+<section class="section">
+  <div class="container">
+    <h1 class="section__title">{{ collection.title }}</h1>
+    {% if collection.description != blank %}<div class="rte center">{{ collection.description }}</div>{% endif %}
+
+    {% paginate collection.products by section.settings.per_page %}
+      <div class="grid grid--4">
+        {% for product in collection.products %}
+          {% render 'product-card', product: product, badge: section.settings.badge %}
+        {% else %}
+          <p>Aucun produit dans cette collection pour le moment.</p>
+        {% endfor %}
+      </div>
+      {% if paginate.pages > 1 %}<div class="pagination">{{ paginate | default_pagination }}</div>{% endif %}
+    {% endpaginate %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    { "type": "range", "id": "per_page", "label": "Produits par page", "min": 8, "max": 24, "step": 4, "default": 16 },
+    { "type": "text", "id": "badge", "label": "Texte du badge (produits tagués best-seller)", "default": "BEST-SELLER" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,26 @@
+{%- assign col = section.settings.collection | default: collections['all'] -%}
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">{{ section.settings.heading }}</h2>
+    <div class="scroller scroller--4">
+      {% for product in col.products limit: section.settings.limit %}
+        {% render 'product-card', product: product, badge: section.settings.badge %}
+      {% else %}
+        <p>Ajoutez des produits à la collection choisie pour les voir ici.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection en vitrine",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "VOUS ALLEZ AUSSI ADORER" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "limit", "label": "Nombre de produits", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "text", "id": "badge", "label": "Texte du badge (produits tagués best-seller)", "default": "BEST-SELLER" }
+  ],
+  "presets": [{ "name": "Collection en vitrine" }]
+}
+{% endschema %}

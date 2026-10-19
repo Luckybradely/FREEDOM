@@ -1,0 +1,14 @@
+<div class="announcement">
+  <p>{{ section.settings.line_1 }}</p>
+  {% if section.settings.line_2 != blank %}<p>{{ section.settings.line_2 }}</p>{% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Bandeau d'annonce",
+  "settings": [
+    { "type": "inline_richtext", "id": "line_1", "label": "Ligne 1", "default": "3 ACHETÉS, LE 4E <strong>OFFERT</strong>" },
+    { "type": "inline_richtext", "id": "line_2", "label": "Ligne 2", "default": "LIVRAISON OFFERTE DÈS 60 € ✨" }
+  ]
+}
+{% endschema %}

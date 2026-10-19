@@ -1,0 +1,41 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "sparkle", "label": "Effet seconde peau" } },
+        "b2": { "type": "benefit", "settings": { "icon": "layers", "label": "Doublure douce" } },
+        "b3": { "type": "benefit", "settings": { "icon": "figure", "label": "Coupe flatteuse" } },
+        "d": { "type": "description", "settings": { "title": "Détails du produit" } },
+        "t1": { "type": "tab", "settings": { "title": "Matière & entretien", "content": "<p>À compléter : composition et conseils d'entretien.</p>" } },
+        "t2": { "type": "tab", "settings": { "title": "Livraison & retours", "content": "<p>À compléter : délais de livraison et politique de retour.</p>" } }
+      },
+      "block_order": ["b1", "b2", "b3", "d", "t1", "t2"],
+      "settings": {}
+    },
+    "marquee": {
+      "type": "marquee",
+      "blocks": {
+        "m1": { "type": "item", "settings": { "text": "RETOURS GRATUITS" } },
+        "m2": { "type": "item", "settings": { "text": "3 ACHETÉS, LE 4E <strong>OFFERT</strong>" } },
+        "m3": { "type": "item", "settings": { "text": "LIVRAISON OFFERTE DÈS 60 €" } }
+      },
+      "block_order": ["m1", "m2", "m3"]
+    },
+    "related": { "type": "featured-collection", "settings": { "heading": "VOUS ALLEZ AUSSI ADORER" } },
+    "reviews": { "type": "reviews", "settings": {} },
+    "tiles": {
+      "type": "feature-tiles",
+      "blocks": {
+        "t1": { "type": "tile", "settings": { "text": "EFFET SECONDE PEAU" } },
+        "t2": { "type": "tile", "settings": { "text": "DOUBLURE THERMIQUE" } },
+        "t3": { "type": "tile", "settings": { "text": "RÉSISTANT ET DURABLE" } },
+        "t4": { "type": "tile", "settings": { "text": "COUPE QUI SCULPTE" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"]
+    },
+    "banner": { "type": "image-banner", "settings": {} },
+    "split": { "type": "image-split", "settings": {} }
+  },
+  "order": ["main", "marquee", "related", "reviews", "tiles", "banner", "split"]
+}

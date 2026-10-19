@@ -1,0 +1,31 @@
+<section class="section section--tight">
+  <div class="container">
+    <div class="banner banner--{{ section.settings.height }}">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 2000 | image_tag: loading: 'lazy', alt: '', sizes: '100vw' }}
+      {% else %}
+        <span class="placeholder" aria-hidden="true"></span>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <div class="banner__content">
+          <h2>{{ section.settings.heading | newline_to_br }}</h2>
+          {% if section.settings.button_label != blank %}<a class="button button--light" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>{% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grande image",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "textarea", "id": "heading", "label": "Titre (une ligne par retour)", "default": "LE PLUS\nDOUX.\nJAMAIS." },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" },
+    { "type": "select", "id": "height", "label": "Hauteur", "default": "large", "options": [ { "value": "medium", "label": "Moyenne" }, { "value": "large", "label": "Grande" } ] }
+  ],
+  "presets": [{ "name": "Grande image" }]
+}
+{% endschema %}

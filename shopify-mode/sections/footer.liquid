@@ -1,0 +1,43 @@
+<footer class="footer">
+  <div class="container footer__top">
+    <div class="footer__news">
+      <h2>{{ section.settings.heading | newline_to_br }}</h2>
+      {% form 'customer', class: 'newsletter' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label class="visually-hidden" for="nl-email">E-mail</label>
+        <input id="nl-email" type="email" name="contact[email]" placeholder="E-MAIL" required autocomplete="email">
+        <button type="submit" class="pill">S'abonner</button>
+        {% if form.posted_successfully? %}<p class="newsletter__ok">Merci, vous êtes inscrit·e.</p>{% endif %}
+      {% endform %}
+    </div>
+    <div class="footer__links">
+      {% for link in linklists[section.settings.menu_1].links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}
+    </div>
+    <div class="footer__links">
+      {% for link in linklists[section.settings.menu_2].links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <div class="footer__social">
+      {% if settings.social_facebook != blank %}<a href="{{ settings.social_facebook }}" aria-label="Facebook">{% render 'icon', name: 'facebook' %}</a>{% endif %}
+      {% if settings.social_instagram != blank %}<a href="{{ settings.social_instagram }}" aria-label="Instagram">{% render 'icon', name: 'instagram' %}</a>{% endif %}
+      {% if settings.social_tiktok != blank %}<a href="{{ settings.social_tiktok }}" aria-label="TikTok">{% render 'icon', name: 'tiktok' %}</a>{% endif %}
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+    </div>
+    <nav class="footer__legal" aria-label="Mentions légales">
+      {% for policy in shop.policies %}<a href="{{ policy.url }}">{{ policy.title }}</a>{% endfor %}
+    </nav>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pied de page",
+  "settings": [
+    { "type": "textarea", "id": "heading", "label": "Titre newsletter", "default": "INSCRIVEZ-VOUS ET RECEVEZ\n10 % SUR VOTRE 1RE COMMANDE" },
+    { "type": "link_list", "id": "menu_1", "label": "Menu colonne 1", "default": "footer" },
+    { "type": "link_list", "id": "menu_2", "label": "Menu colonne 2" }
+  ]
+}
+{% endschema %}

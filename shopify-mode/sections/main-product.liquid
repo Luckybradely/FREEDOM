@@ -1,0 +1,197 @@
+{%- assign current = product.selected_or_first_available_variant -%}
+<section class="section section--tight" data-product>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Fil d'Ariane">
+      <a href="{{ routes.root_url }}">Accueil</a> /
+      {% if collection %}<a href="{{ collection.url }}">{{ collection.title }}</a> /{% endif %}
+      <span aria-current="page">{{ product.title }}</span>
+    </nav>
+
+    <div class="product">
+      {%- comment -%} Galerie : miniatures verticales + diaporama {%- endcomment -%}
+      <div class="gallery" data-gallery>
+        {% if product.media.size > 1 %}
+          <div class="gallery__thumbs">
+            {% for media in product.media %}
+              <button type="button" class="gallery__thumb{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}">
+                {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+        <div class="gallery__main">
+          <div class="gallery__track" data-track>
+            {% for media in product.media %}
+              <div class="gallery__slide">
+                {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                  {{ media | media_tag: image_size: '1200x', loop: true, muted: true, autoplay: false }}
+                {%- else -%}
+                  {%- assign alt_text = media.alt | default: product.title -%}
+                  {{ media.preview_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: alt_text, sizes: '(min-width: 750px) 45vw, 100vw' }}
+                {%- endif -%}
+              </div>
+            {% else %}
+              <div class="gallery__slide"><span class="placeholder" aria-hidden="true"></span></div>
+            {% endfor %}
+          </div>
+          {% if product.media.size > 1 %}
+            <button type="button" class="gallery__arrow gallery__arrow--prev" data-prev aria-label="Image précédente">{% render 'icon', name: 'chevron-left' %}</button>
+            <button type="button" class="gallery__arrow gallery__arrow--next" data-next aria-label="Image suivante">{% render 'icon', name: 'chevron-right' %}</button>
+          {% endif %}
+          {% if section.settings.badge != blank and product.tags contains 'best-seller' %}<span class="badge">{{ section.settings.badge }}</span>{% endif %}
+        </div>
+      </div>
+
+      <div class="product__info">
+        <div class="product__head">
+          <h1>{{ product.title }}</h1>
+          <p class="product__price" data-price>
+            {{ current.price | money }}{% if current.compare_at_price > current.price %} <s>{{ current.compare_at_price | money }}</s>{% endif %}
+          </p>
+        </div>
+        {% if product.metafields.custom.subtitle != blank %}<p class="product__subtitle">{{ product.metafields.custom.subtitle }}</p>{% endif %}
+
+        {%- comment -%} Note : affichée uniquement si une appli d'avis remplit les métachamps standard. {%- endcomment -%}
+        {%- assign rating = product.metafields.reviews.rating.value -%}
+        {%- assign rating_count = product.metafields.reviews.rating_count.value | plus: 0 -%}
+        {% if rating != blank and rating_count > 0 %}
+          {%- assign rounded = rating.rating | round -%}
+          <p class="product__rating"><span class="stars" aria-label="{{ rating.rating }} sur 5">{% for i in (1..5) %}{% if i <= rounded %}★{% else %}☆{% endif %}{% endfor %}</span> ({{ rating_count }})</p>
+        {% endif %}
+
+        {% form 'product', product, class: 'product__form', data-product-form: '' %}
+          <input type="hidden" name="id" value="{{ current.id }}" data-variant-id>
+
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+              {%- assign option_name = option.name | downcase -%}
+              {%- assign is_color = false -%}
+              {%- if option_name contains 'coul' or option_name contains 'color' or option_name contains 'teinte' or option_name contains 'shade' -%}{%- assign is_color = true -%}{%- endif -%}
+              <fieldset class="option" data-option-index="{{ forloop.index0 }}">
+                <legend>
+                  {{ option.name }} : <span data-option-label>{{ option.selected_value }}</span>
+                  {% if forloop.last and section.settings.size_guide != blank %}<a class="option__guide" href="{{ section.settings.size_guide }}">Guide des tailles</a>{% endif %}
+                </legend>
+                <div class="option__values">
+                  {% for value in option.values %}
+                    <label class="{% if is_color %}swatch-input{% else %}pill-input{% endif %}">
+                      <input type="radio" name="option-{{ option.position }}" value="{{ value | escape }}"{% if value == option.selected_value %} checked{% endif %}>
+                      {% if is_color %}
+                        <span class="swatch" style="--swatch: {{ value.swatch.color | default: '#ccc' }}" title="{{ value }}"><span class="visually-hidden">{{ value }}</span></span>
+                      {% else %}
+                        <span class="pill">{{ value }}</span>
+                      {% endif %}
+                    </label>
+                  {% endfor %}
+                </div>
+              </fieldset>
+            {% endfor %}
+          {% endunless %}
+
+          <div class="buy">
+            <div class="qty">
+              <button type="button" data-qty="-1" aria-label="Diminuer">{% render 'icon', name: 'minus' %}</button>
+              <input type="number" name="quantity" value="1" min="1" aria-label="Quantité">
+              <button type="button" data-qty="1" aria-label="Augmenter">{% render 'icon', name: 'plus' %}</button>
+            </div>
+            <button type="submit" class="button" data-add{% unless current.available %} disabled{% endunless %}>
+              <span data-add-label>{% if current.available %}Ajouter au panier{% else %}Épuisé{% endif %}</span>
+              {% render 'icon', name: 'cart' %}
+            </button>
+          </div>
+
+          <script type="application/json" data-variants>
+            [{% for variant in product.variants %}{"id":{{ variant.id }},"options":{{ variant.options | json }},"available":{{ variant.available | json }},"price":{{ variant.price | money | json }},"compare":{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money | json }}{% else %}null{% endif %}}{% unless forloop.last %},{% endunless %}{% endfor %}]
+          </script>
+        {% endform %}
+
+        <div class="accordions">
+          {%- assign benefits = section.blocks | where: 'type', 'benefit' -%}
+          {% if benefits.size > 0 %}
+            <details class="accordion" open>
+              <summary>{{ section.settings.benefits_title }}{% render 'icon', name: 'chevron-down' %}</summary>
+              <div class="benefits">
+                {% for block in benefits %}
+                  <div class="benefit" {{ block.shopify_attributes }}>{% render 'icon', name: block.settings.icon %}<span>{{ block.settings.label }}</span></div>
+                {% endfor %}
+              </div>
+            </details>
+          {% endif %}
+
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'description' %}
+                {% if product.description != blank %}
+                  <details class="accordion" {{ block.shopify_attributes }}>
+                    <summary>{{ block.settings.title }}{% render 'icon', name: 'chevron-down' %}</summary>
+                    <div class="rte">{{ product.description }}</div>
+                  </details>
+                {% endif %}
+              {% when 'tab' %}
+                <details class="accordion" {{ block.shopify_attributes }}>
+                  <summary>{{ block.settings.title }}{% render 'icon', name: 'chevron-down' %}</summary>
+                  <div class="rte">{{ block.settings.content }}</div>
+                </details>
+            {% endcase %}
+          {% endfor %}
+
+          {%- assign together = section.settings.together_collection -%}
+          {% if together != blank and together.products_count > 0 %}
+            <details class="accordion" open>
+              <summary>{{ section.settings.together_title }}{% render 'icon', name: 'chevron-down' %}</summary>
+              <div class="scroller scroller--2">
+                {% for item in together.products limit: 6 %}
+                  {% unless item.id == product.id %}{% render 'product-card', product: item, badge: section.settings.badge %}{% endunless %}
+                {% endfor %}
+              </div>
+            </details>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fiche produit",
+  "settings": [
+    { "type": "paragraph", "content": "Sous-titre : métachamp produit custom.subtitle. Note étoilée : remplie automatiquement par une appli d'avis (Judge.me, Loox…). Badge : ajoutez le tag « best-seller » au produit." },
+    { "type": "text", "id": "badge", "label": "Texte du badge", "default": "BEST-SELLER" },
+    { "type": "url", "id": "size_guide", "label": "Lien du guide des tailles" },
+    { "type": "text", "id": "benefits_title", "label": "Titre des avantages", "default": "Points forts" },
+    { "type": "text", "id": "together_title", "label": "Titre « souvent achetés ensemble »", "default": "Souvent achetés ensemble" },
+    { "type": "collection", "id": "together_collection", "label": "Collection « souvent achetés ensemble »" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Avantage (icône)",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icône", "default": "sparkle", "options": [
+          { "value": "sparkle", "label": "Étincelle" }, { "value": "layers", "label": "Couches" }, { "value": "circle", "label": "Maille" },
+          { "value": "figure", "label": "Silhouette" }, { "value": "leaf", "label": "Feuille" }, { "value": "shield", "label": "Bouclier" },
+          { "value": "heart", "label": "Cœur" }, { "value": "truck", "label": "Livraison" }
+        ] },
+        { "type": "text", "id": "label", "label": "Texte", "default": "Avantage" }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description du produit",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Détails du produit" }
+      ]
+    },
+    {
+      "type": "tab",
+      "name": "Onglet",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Onglet" },
+        { "type": "richtext", "id": "content", "label": "Contenu" }
+      ]
+    }
+  ]
+}
+{% endschema %}
