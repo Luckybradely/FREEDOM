@@ -53,5 +53,22 @@
         "default": "#E58A2B"
       }
     ]
+  },
+  {
+    "name": "Typographie",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_heading_font",
+        "label": "Police des titres",
+        "default": "poppins_n7"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Police du texte",
+        "default": "poppins_n4"
+      }
+    ]
   }
 ]

@@ -17,10 +17,14 @@
       {%- endif -%}
     </a>
 
-    <a class="header__cart" href="{{ routes.cart_url }}" aria-label="Panier ({{ cart.item_count }})">
-      {% render 'icon', name: 'cart' %}
-      {% if cart.item_count > 0 %}<span class="header__badge">{{ cart.item_count }}</span>{% endif %}
-    </a>
+    <div class="header__icons">
+      <a href="{{ routes.search_url }}" aria-label="Rechercher">{% render 'icon', name: 'search' %}</a>
+      {% if shop.customer_accounts_enabled %}<a href="{{ routes.account_url }}" aria-label="Mon compte">{% render 'icon', name: 'account' %}</a>{% endif %}
+      <a class="header__cart" href="{{ routes.cart_url }}" aria-label="Panier ({{ cart.item_count }})">
+        {% render 'icon', name: 'cart' %}
+        {% if cart.item_count > 0 %}<span class="header__badge">{{ cart.item_count }}</span>{% endif %}
+      </a>
+    </div>
   </div>
 </header>
 

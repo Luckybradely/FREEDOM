@@ -1,5 +1,10 @@
 <section class="guarantee">
   <div class="container container--narrow center">
+    {% if section.settings.badge != blank %}
+      {{ section.settings.badge | image_url: width: 300 | image_tag: loading: 'lazy', alt: '', class: 'guarantee__badge-img' }}
+    {% elsif section.settings.badge_text != blank %}
+      <div class="guarantee__badge" aria-hidden="true"><span>{{ section.settings.badge_text | newline_to_br }}</span></div>
+    {% endif %}
     {% if section.settings.eyebrow != blank %}<p class="guarantee__eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
     <h2>{{ section.settings.heading }} <em>{{ section.settings.heading_accent }}</em></h2>
     <p class="guarantee__text">{{ section.settings.text }}</p>
@@ -13,6 +18,8 @@
 {
   "name": "Bandeau garantie",
   "settings": [
+    { "type": "image_picker", "id": "badge", "label": "Image du badge (facultatif)" },
+    { "type": "textarea", "id": "badge_text", "label": "Texte du badge rond (si pas d'image)", "default": "100 %\nREMBOURSÉ" },
     { "type": "text", "id": "eyebrow", "label": "Petit titre (en orange)", "default": "SATISFAIT OU REMBOURSÉ" },
     { "type": "text", "id": "heading", "label": "Titre", "default": "Éliminez les odeurs ou" },
     { "type": "text", "id": "heading_accent", "label": "Fin du titre (italique orange)", "default": "soyez remboursé !" },

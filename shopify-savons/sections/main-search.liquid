@@ -1,0 +1,30 @@
+<section class="section">
+  <div class="container">
+    <h1 class="section__title">Recherche</h1>
+    <form action="{{ routes.search_url }}" method="get" class="search-form" role="search">
+      <label class="visually-hidden" for="q">Rechercher</label>
+      <input id="q" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Que cherchez-vous ?">
+      <input type="hidden" name="type" value="product">
+      <button class="button" type="submit">Rechercher</button>
+    </form>
+
+    {% if search.performed %}
+      {% paginate search.results by 12 %}
+        <p class="center">{{ search.results_count }} résultat(s)</p>
+        <div class="grid grid--4">
+          {% for item in search.results %}
+            {% if item.object_type == 'product' %}{% render 'product-card', product: item %}{% endif %}
+          {% endfor %}
+        </div>
+        {% if paginate.pages > 1 %}<div class="pagination">{{ paginate | default_pagination }}</div>{% endif %}
+      {% endpaginate %}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Recherche",
+  "settings": []
+}
+{% endschema %}

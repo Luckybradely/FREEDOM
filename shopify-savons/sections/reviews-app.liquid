@@ -1,0 +1,22 @@
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">{{ section.settings.heading }} {% if section.settings.heading_accent != blank %}<em>{{ section.settings.heading_accent }}</em>{% endif %}</h2>
+    {% for block in section.blocks %}
+      <div class="app-block">{% render block %}</div>
+    {% else %}
+      <p class="center small">Installez une application d'avis (Judge.me, Loox…), puis ajoutez son bloc à cette section dans l'éditeur de thème.</p>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Avis vérifiés (appli)",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Avis vérifiés" },
+    { "type": "text", "id": "heading_accent", "label": "Fin du titre (italique vert)", "default": "sur notre savon" }
+  ],
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "Avis vérifiés (appli)" }]
+}
+{% endschema %}

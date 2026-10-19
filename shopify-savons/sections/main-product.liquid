@@ -1,5 +1,5 @@
 {%- assign current = product.selected_or_first_available_variant -%}
-<section class="section">
+<section class="section section--product">
   <div class="container product">
     <div class="product__media" data-gallery>
       <div class="product__main">
@@ -8,22 +8,28 @@
         {% else %}
           <div class="card__placeholder" aria-hidden="true"></div>
         {% endif %}
+        {% if product.media.size > 1 %}
+          <button type="button" class="gallery-arrow gallery-arrow--prev" data-step="-1" aria-label="Image précédente">‹</button>
+          <button type="button" class="gallery-arrow gallery-arrow--next" data-step="1" aria-label="Image suivante">›</button>
+        {% endif %}
       </div>
       {% if product.media.size > 1 %}
         <div class="product__thumbs">
           {% for media in product.media %}
             {%- assign alt_text = media.alt | default: product.title -%}
-            <button type="button" class="product__thumb{% if forloop.first %} is-active{% endif %}" data-src="{{ media | image_url: width: 1000 }}" aria-label="Image {{ forloop.index }}">
-              {{ media | image_url: width: 160 | image_tag: loading: 'lazy', alt: alt_text }}
+            <button type="button" class="product__thumb{% if forloop.first %} is-active{% endif %}" data-src="{{ media.preview_image | image_url: width: 1000 }}" aria-label="Image {{ forloop.index }}">
+              {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: alt_text }}
             </button>
           {% endfor %}
         </div>
       {% endif %}
       {% if section.settings.quote != blank %}
         <blockquote class="product__quote">
-          {% render 'stars', count: 5 %}
-          <strong>{{ section.settings.quote_author }}</strong>
-          <p>{{ section.settings.quote }}</p>
+          <div class="product__quote-head">
+            {% render 'stars', count: 5 %} <strong>{{ section.settings.quote_author }}</strong>
+            <span class="product__verified">{% render 'icon', name: 'check' %} Acheteur vérifié</span>
+          </div>
+          <p>« {{ section.settings.quote }} »</p>
         </blockquote>
       {% endif %}
     </div>
@@ -41,19 +47,23 @@
           <div class="bundles">
             {% for variant in product.variants %}
               {%- assign units = variant.metafields.custom.units.value | plus: 0 -%}
+              {%- assign bonus = variant.metafields.custom.bonus.value -%}
               <label class="bundle">
                 <input type="radio" name="id" value="{{ variant.id }}"{% if variant == current %} checked{% endif %}{% unless variant.available %} disabled{% endunless %}>
                 <span class="bundle__box">
                   {% if forloop.index == section.settings.popular_index %}<span class="bundle__badge">{{ section.settings.popular_label }}</span>{% endif %}
-                  <span class="bundle__radio" aria-hidden="true"></span>
-                  <span class="bundle__name">
-                    {{ variant.title }}
-                    {% if units > 0 %}<small>{{ variant.price | divided_by: units | money }} / unité</small>{% endif %}
+                  <span class="bundle__row">
+                    <span class="bundle__radio" aria-hidden="true"></span>
+                    <span class="bundle__name">
+                      {{ variant.title }}
+                      {% if units > 0 %}<small>{{ variant.price | divided_by: units | money }} / unité</small>{% endif %}
+                    </span>
+                    <span class="bundle__price">
+                      {{ variant.price | money }}
+                      {% if variant.compare_at_price > variant.price %}<s>{{ variant.compare_at_price | money }}</s>{% endif %}
+                    </span>
                   </span>
-                  <span class="bundle__price">
-                    {{ variant.price | money }}
-                    {% if variant.compare_at_price > variant.price %}<s>{{ variant.compare_at_price | money }}</s>{% endif %}
-                  </span>
+                  {% if bonus != blank %}<span class="bundle__bonus">{% render 'icon', name: 'gift' %} {{ bonus }}</span>{% endif %}
                 </span>
               </label>
             {% endfor %}
@@ -66,6 +76,19 @@
           </p>
         {% endunless %}
 
+        {%- comment -%} Abonnement : s'affiche si le produit a un plan d'abonnement (appli Shopify Subscriptions). {%- endcomment -%}
+        {%- assign plan = product.selling_plan_groups.first.selling_plans.first -%}
+        {% if plan %}
+          <label class="subscribe">
+            <input type="checkbox" name="selling_plan" value="{{ plan.id }}"{% if product.requires_selling_plan %} checked disabled{% endif %}>
+            <span class="subscribe__box" aria-hidden="true">{% render 'icon', name: 'check' %}</span>
+            <span>
+              <strong>{{ section.settings.subscribe_title | default: plan.name }}</strong>
+              {% if section.settings.subscribe_text != blank %}<small>{{ section.settings.subscribe_text }}</small>{% endif %}
+            </span>
+          </label>
+        {% endif %}
+
         {% if section.settings.shipping_note != blank %}
           <p class="product__note">{% render 'icon', name: 'leaf' %} {{ section.settings.shipping_note }}</p>
         {% endif %}
@@ -75,26 +98,34 @@
         </button>
       {% endform %}
 
-      {% for block in section.blocks %}
-        {% if block.type == '@app' %}<div class="app-block">{% render block %}</div>{% endif %}
-      {% endfor %}
-
       {% if section.settings.under_button != blank %}<p class="product__under">{{ section.settings.under_button }}</p>{% endif %}
       <div class="payment-icons">{{ shop.enabled_payment_types | payment_type_svg_tag: class: 'payment-icon' }}</div>
-    </div>
-  </div>
 
-  <div class="container trust">
-    {% for i in (1..3) %}
-      {%- assign t_key = 'trust_' | append: i -%}
-      {%- assign icon_key = 'trust_icon_' | append: i -%}
-      {% if section.settings[t_key] != blank %}
-        <div class="trust__item">
-          <span class="trust__icon">{% render 'icon', name: section.settings[icon_key] %}</span>
-          <p>{{ section.settings[t_key] }}</p>
-        </div>
-      {% endif %}
-    {% endfor %}
+      <div class="trust">
+        {% for i in (1..3) %}
+          {%- assign t_key = 'trust_' | append: i -%}
+          {%- assign icon_key = 'trust_icon_' | append: i -%}
+          {% if section.settings[t_key] != blank %}
+            <div class="trust__item">
+              <span class="trust__icon">{% render 'icon', name: section.settings[icon_key] %}</span>
+              <p>{{ section.settings[t_key] }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'question' %}
+            <details class="faq" {{ block.shopify_attributes }}>
+              <summary>{{ block.settings.question }}<span class="faq__plus">{% render 'icon', name: 'plus' %}</span></summary>
+              <p>{{ block.settings.answer }}</p>
+            </details>
+          {% when '@app' %}
+            <div class="app-block">{% render block %}</div>
+        {% endcase %}
+      {% endfor %}
+    </div>
   </div>
 </section>
 
@@ -102,10 +133,13 @@
 {
   "name": "Fiche produit",
   "settings": [
-    { "type": "text", "id": "rating_text", "label": "Ligne sous les étoiles (ex : avis réels uniquement)", "info": "N'affichez que des chiffres vrais." },
+    { "type": "paragraph", "content": "Métachamps de variante facultatifs : custom.units (nombre de savons, pour le prix par unité) et custom.bonus (texte du cadeau, ex. « + porte-savon offert »)." },
+    { "type": "text", "id": "rating_text", "label": "Ligne à côté des étoiles", "info": "N'affichez que des chiffres vrais." },
     { "type": "text", "id": "bundle_title", "label": "Titre des lots", "default": "PLUS VOUS EN PRENEZ, PLUS VOUS ÉCONOMISEZ" },
     { "type": "range", "id": "popular_index", "label": "Lot « le plus populaire » (position, 0 = aucun)", "min": 0, "max": 6, "step": 1, "default": 0 },
     { "type": "text", "id": "popular_label", "label": "Libellé du badge", "default": "LE PLUS POPULAIRE" },
+    { "type": "text", "id": "subscribe_title", "label": "Titre de l'abonnement", "default": "Abonnez-vous et économisez" },
+    { "type": "text", "id": "subscribe_text", "label": "Texte de l'abonnement", "default": "Sans engagement, annulable à tout moment." },
     { "type": "text", "id": "shipping_note", "label": "Message au-dessus du bouton", "default": "Plus vous commandez, moins l'expédition vous coûte par savon." },
     { "type": "text", "id": "under_button", "label": "Message sous le bouton" },
     { "type": "textarea", "id": "quote", "label": "Témoignage sous les photos (un vrai client)" },
@@ -118,6 +152,16 @@
     { "type": "select", "id": "trust_icon_3", "label": "Icône 3", "default": "drop", "options": [{ "value": "clock", "label": "Horloge" }, { "value": "shield", "label": "Bouclier" }, { "value": "drop", "label": "Goutte" }, { "value": "leaf", "label": "Feuille" }, { "value": "heart", "label": "Cœur" }] },
     { "type": "text", "id": "trust_3", "label": "Texte 3", "default": "Doux pour la peau mature" }
   ],
-  "blocks": [{ "type": "@app" }]
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question" },
+        { "type": "textarea", "id": "answer", "label": "Réponse" }
+      ]
+    },
+    { "type": "@app" }
+  ]
 }
 {% endschema %}

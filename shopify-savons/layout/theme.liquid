@@ -8,8 +8,15 @@
     <title>{{ page_title }}{% if current_tags %} – {{ 'tags' }}: {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} – Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}</title>
     {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
 
+    {%- assign body_bold = settings.type_body_font | font_modify: 'weight', 'bold' -%}
     <style>
+      {{ settings.type_heading_font | font_face: font_display: 'swap' }}
+      {{ settings.type_body_font | font_face: font_display: 'swap' }}
+      {% if body_bold %}{{ body_bold | font_face: font_display: 'swap' }}{% endif %}
       :root {
+        --font-heading: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }};
+        --font-heading-weight: {{ settings.type_heading_font.weight }};
+        --font-body: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
         --color-bg: {{ settings.color_bg }};
         --color-text: {{ settings.color_text }};
         --color-accent: {{ settings.color_accent }};

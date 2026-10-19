@@ -1,47 +1,263 @@
 {
   "sections": {
-    "main": { "type": "main-product", "settings": {} },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Quand verrai-je les premiers résultats ?",
+            "answer": "À compléter avec une réponse honnête."
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Combien de temps dure un savon ?",
+            "answer": "À compléter selon l'usage réel."
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Est-ce que cela dessèche la peau ?",
+            "answer": "À compléter selon votre formule."
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Pourquoi est-il plus cher qu'un savon classique ?",
+            "answer": "À compléter : ingrédients, fabrication…"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {}
+    },
     "steps": {
       "type": "steps",
       "blocks": {
-        "s1": { "type": "step", "settings": { "title": "Remplacez votre savon", "text": "Utilisez-le à la place de votre savon ou gel douche habituel." } },
-        "s2": { "type": "step", "settings": { "title": "Douchez-vous comme d'habitude", "text": "Savonnez le cou, la poitrine et le dos, puis rincez." } },
-        "s3": { "type": "step", "settings": { "title": "Sentez la différence", "text": "À vous de juger dès les premières douches." } }
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Remplacez votre savon",
+            "text": "Utilisez-le à la place de votre savon ou gel douche habituel."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Douchez-vous comme d'habitude",
+            "text": "Savonnez le cou, la poitrine et le dos, puis rincez."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Sentez la différence",
+            "text": "À vous de juger dès les premières douches."
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3"],
-      "settings": {}
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "heading": "Un seul changement : votre savon"
+      }
     },
-    "reviews": { "type": "testimonials", "settings": {} },
+    "reviews": {
+      "type": "testimonials",
+      "settings": {
+        "heading": "De vrais résultats dès",
+        "heading_accent": "la première douche",
+        "button_label": "Obtenir les mêmes résultats"
+      }
+    },
     "feature": {
       "type": "feature",
+      "blocks": {
+        "i1": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "title": "Ingrédient 1",
+            "text": "Son rôle (à compléter)"
+          }
+        },
+        "i2": {
+          "type": "item",
+          "settings": {
+            "icon": "drop",
+            "title": "Ingrédient 2",
+            "text": "Son rôle (à compléter)"
+          }
+        },
+        "i3": {
+          "type": "item",
+          "settings": {
+            "icon": "heart",
+            "title": "Ingrédient 3",
+            "text": "Son rôle (à compléter)"
+          }
+        }
+      },
+      "block_order": [
+        "i1",
+        "i2",
+        "i3"
+      ],
       "settings": {
-        "heading": "Doux pour la peau,",
-        "heading_accent": "jamais agressif",
-        "text": "<p>Décrivez ici votre formule et pourquoi elle respecte la peau mature.</p>",
-        "soft": true
+        "heading": "Une peau",
+        "heading_accent": "toute douce",
+        "text": "<p>Décrivez votre formule et pourquoi elle respecte la peau mature.</p>",
+        "soft": false
       }
     },
     "compare": {
       "type": "comparison",
       "blocks": {
-        "r1": { "type": "row", "settings": { "label": "Neutralise les odeurs", "ours": "Formule ciblée", "other_2": "Parfum qui masque", "status_2": "no", "other_3": "Efficacité limitée", "status_3": "partial" } },
-        "r2": { "type": "row", "settings": { "label": "Respecte la peau mature", "ours": "Formule douce", "other_2": "Souvent desséchant", "status_2": "partial", "other_3": "Variable", "status_3": "partial" } },
-        "r3": { "type": "row", "settings": { "label": "Ingrédients clairs", "ours": "Liste complète affichée", "other_2": "Liste floue", "status_2": "no", "other_3": "Liste longue", "status_3": "partial" } }
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "Neutralise les odeurs",
+            "ours": "Formule ciblée",
+            "other_2": "Parfum qui masque",
+            "status_2": "no",
+            "other_3": "Efficacité limitée",
+            "status_3": "partial"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "Respecte la peau mature",
+            "ours": "Formule douce",
+            "other_2": "Souvent desséchant",
+            "status_2": "partial",
+            "other_3": "Variable",
+            "status_3": "partial"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "Ingrédients clairs",
+            "ours": "Liste complète affichée",
+            "other_2": "Liste floue",
+            "status_2": "no",
+            "other_3": "Liste longue",
+            "status_3": "partial"
+          }
+        }
       },
-      "block_order": ["r1", "r2", "r3"],
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
       "settings": {}
     },
-    "guarantee": { "type": "guarantee", "settings": {} },
+    "guarantee": {
+      "type": "guarantee",
+      "settings": {}
+    },
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "Quand verrai-je les premiers résultats ?", "answer": "À compléter avec une réponse honnête." } },
-        "q2": { "type": "question", "settings": { "question": "Combien de temps dure un savon ?", "answer": "À compléter selon l'usage réel de votre produit." } },
-        "q3": { "type": "question", "settings": { "question": "Est-ce que cela dessèche la peau ?", "answer": "À compléter selon votre formule." } }
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Quels sont les ingrédients ?",
+            "answer": "À compléter avec votre liste d'ingrédients exacte (INCI)."
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Convient-il aux peaux sensibles ?",
+            "answer": "À compléter selon votre formule. Conseillez un test sur une petite zone."
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Le parfum est-il fort ?",
+            "answer": "À compléter."
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Quand dois-je l'utiliser ?",
+            "answer": "À la douche, à la place de votre savon habituel."
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Puis-je l'utiliser sur le visage ?",
+            "answer": "À compléter selon votre formule."
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Quelle est votre politique de retour ?",
+            "answer": "À compléter avec votre vraie politique de retour."
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
+      "settings": {}
+    },
+    "why": {
+      "type": "feature",
+      "settings": {
+        "heading": "Pourquoi un savon classique",
+        "heading_accent": "ne suffit pas",
+        "text": "<p>Expliquez ici, avec des informations vérifiées, pourquoi votre savon agit là où un savon ordinaire échoue. Ajoutez une illustration à droite.</p>",
+        "soft": false
+      }
+    },
+    "reviews_2": {
+      "type": "testimonials",
+      "settings": {
+        "heading": "Ils ont fait le changement",
+        "soft": true,
+        "button_label": "Faire le changement"
+      }
+    },
+    "reviews_app": {
+      "type": "reviews-app",
       "settings": {}
     }
   },
-  "order": ["main", "steps", "reviews", "feature", "compare", "guarantee", "faq"]
+  "order": [
+    "main",
+    "why",
+    "reviews",
+    "feature",
+    "guarantee",
+    "compare",
+    "steps",
+    "reviews_2",
+    "faq",
+    "reviews_app"
+  ]
 }

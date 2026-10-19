@@ -22,6 +22,7 @@
 
     {% if section.settings.button_label != blank %}
       <p class="center"><a class="button button--big" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a></p>
+      {% if section.settings.note != blank %}<p class="center small">{{ section.settings.note }}</p>{% endif %}
     {% endif %}
   </div>
 </section>
@@ -36,7 +37,8 @@
     { "type": "text", "id": "col_2", "label": "Colonne 2", "default": "Savon bas de gamme" },
     { "type": "text", "id": "col_3", "label": "Colonne 3", "default": "Savon classique" },
     { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Choisir le savon qui fonctionne" },
-    { "type": "url", "id": "button_link", "label": "Lien du bouton" }
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" },
+    { "type": "text", "id": "note", "label": "Note sous le bouton" }
   ],
   "blocks": [
     {
