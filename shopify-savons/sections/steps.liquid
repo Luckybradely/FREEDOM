@@ -1,0 +1,38 @@
+<section class="section section--soft">
+  <div class="container container--narrow">
+    <h2 class="section__title">{{ section.settings.heading }}</h2>
+    <p class="section__sub">{{ section.settings.subheading }}</p>
+    <ol class="steps">
+      {% for block in section.blocks %}
+        <li class="steps__item" {{ block.shopify_attributes }}>
+          <span class="steps__num">{{ forloop.index }}</span>
+          <div>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Étapes",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Un seul changement : votre savon" },
+    { "type": "text", "id": "subheading", "label": "Sous-titre", "default": "Aucune nouvelle routine. Vous changez simplement de savon." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Étape",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Étape" },
+        { "type": "textarea", "id": "text", "label": "Texte" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Étapes" }]
+}
+{% endschema %}

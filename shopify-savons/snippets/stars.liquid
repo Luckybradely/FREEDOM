@@ -1,0 +1,2 @@
+{%- comment -%} Usage: {% render 'stars', count: 5 %} {%- endcomment -%}
+<span class="stars" role="img" aria-label="{{ count }} sur 5">{% for i in (1..5) %}{% if i <= count %}★{% else %}☆{% endif %}{% endfor %}</span>

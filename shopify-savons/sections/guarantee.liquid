@@ -1,0 +1,25 @@
+<section class="guarantee">
+  <div class="container container--narrow center">
+    {% if section.settings.eyebrow != blank %}<p class="guarantee__eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+    <h2>{{ section.settings.heading }} <em>{{ section.settings.heading_accent }}</em></h2>
+    <p class="guarantee__text">{{ section.settings.text }}</p>
+    {% if section.settings.button_label != blank %}
+      <a class="button button--cream button--big" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bandeau garantie",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Petit titre (en orange)", "default": "SATISFAIT OU REMBOURSÉ" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Éliminez les odeurs ou" },
+    { "type": "text", "id": "heading_accent", "label": "Fin du titre (italique orange)", "default": "soyez remboursé !" },
+    { "type": "textarea", "id": "text", "label": "Texte", "info": "N'annoncez que la politique de retour que vous appliquerez vraiment.", "default": "Essayez sans risque." },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Essayer sans risque" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" }
+  ],
+  "presets": [{ "name": "Bandeau garantie" }]
+}
+{% endschema %}

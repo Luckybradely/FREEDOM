@@ -4,35 +4,49 @@
       "type": "hero",
       "settings": {
         "heading": "Une peau propre. Une odeur neutre. Une vraie confiance.",
-        "text": "Des savons doux, conçus pour la peau mature, qui éliminent les odeurs de transpiration et de la journée. Simples à utiliser, efficaces dès la première douche.",
+        "text": "Un savon doux, conçu pour la peau mature, pour vous sentir frais après chaque douche. Pas de nouvelle routine : vous changez simplement de savon.",
         "button_label": "Voir nos savons",
         "button_link": "shopify://collections/all"
       }
-    },
-    "benefits": {
-      "type": "benefits",
-      "blocks": {
-        "b1": { "type": "item", "settings": { "title": "Neutralise les odeurs", "text": "Une formule qui agit sur la cause des mauvaises odeurs, pas seulement pour les masquer." } },
-        "b2": { "type": "item", "settings": { "title": "Doux pour la peau mature", "text": "Sans produits agressifs. Respecte une peau plus fine et plus sèche." } },
-        "b3": { "type": "item", "settings": { "title": "Efficace dès l'usage", "text": "Un geste simple à la douche, sans routine compliquée." } }
-      },
-      "block_order": ["b1", "b2", "b3"],
-      "settings": { "heading": "Pourquoi ça marche" }
     },
     "featured": {
       "type": "featured-collection",
       "settings": { "heading": "Nos savons", "products_count": 4 }
     },
+    "steps": {
+      "type": "steps",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Remplacez votre savon", "text": "Utilisez-le à la place de votre savon ou gel douche habituel. Aucune étape en plus." } },
+        "s2": { "type": "step", "settings": { "title": "Douchez-vous comme d'habitude", "text": "Savonnez le cou, la poitrine et le dos, puis rincez." } },
+        "s3": { "type": "step", "settings": { "title": "Sentez la différence", "text": "À vous de juger dès les premières douches." } }
+      },
+      "block_order": ["s1", "s2", "s3"],
+      "settings": {}
+    },
+    "feature": {
+      "type": "feature",
+      "settings": {
+        "heading": "Un savon pensé pour",
+        "heading_accent": "la peau mature",
+        "text": "<p>Décrivez ici ce qui rend votre savon différent : sa formule, ses ingrédients, pourquoi il convient aux peaux plus sèches.</p>",
+        "soft": false
+      }
+    },
+    "guarantee": {
+      "type": "guarantee",
+      "settings": {}
+    },
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "À partir de quel âge les odeurs corporelles changent-elles ?", "answer": "Avec l'âge, la composition de la peau évolue et les odeurs peuvent devenir plus présentes. C'est normal, et un savon adapté aide beaucoup." } },
-        "q2": { "type": "question", "settings": { "question": "Est-ce que le savon irrite la peau sensible ?", "answer": "Nos savons sont conçus pour être doux. En cas de doute, testez sur une petite zone avant la première utilisation." } },
-        "q3": { "type": "question", "settings": { "question": "Quand vais-je recevoir ma commande ?", "answer": "Les délais de livraison sont indiqués au moment du paiement." } }
+        "q1": { "type": "question", "settings": { "question": "Quels sont les ingrédients ?", "answer": "À compléter avec votre liste d'ingrédients exacte." } },
+        "q2": { "type": "question", "settings": { "question": "Convient-il aux peaux sensibles ?", "answer": "À compléter selon votre formule. Conseillez toujours un test sur une petite zone." } },
+        "q3": { "type": "question", "settings": { "question": "Quand dois-je l'utiliser ?", "answer": "À la douche, à la place de votre savon habituel." } },
+        "q4": { "type": "question", "settings": { "question": "Quelle est votre politique de retour ?", "answer": "À compléter avec votre vraie politique de retour." } }
       },
-      "block_order": ["q1", "q2", "q3"],
-      "settings": { "heading": "Vos questions" }
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": {}
     }
   },
-  "order": ["hero", "benefits", "featured", "faq"]
+  "order": ["hero", "featured", "steps", "feature", "guarantee", "faq"]
 }

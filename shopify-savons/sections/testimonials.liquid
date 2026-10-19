@@ -1,0 +1,52 @@
+{%- if section.blocks.size > 0 -%}
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">{{ section.settings.heading }}</h2>
+    {% if section.settings.subheading != blank %}<p class="section__sub">{% render 'stars', count: 5 %} {{ section.settings.subheading }}</p>{% endif %}
+    <div class="grid grid--3">
+      {% for block in section.blocks %}
+        <figure class="review" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.name, class: 'review__img' }}
+          {% endif %}
+          {% render 'stars', count: block.settings.stars %}
+          <h3>« {{ block.settings.title }} »</h3>
+          <p>{{ block.settings.text }}</p>
+          <figcaption><strong>{{ block.settings.name }}</strong><span>{% render 'icon', name: 'check' %} Acheteur vérifié</span></figcaption>
+        </figure>
+      {% endfor %}
+    </div>
+    {% if section.settings.button_label != blank %}
+      <p class="center"><a class="button button--big" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a></p>
+      {% if section.settings.note != blank %}<p class="center small">{{ section.settings.note }}</p>{% endif %}
+    {% endif %}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Avis clients",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Ils ont fait le changement" },
+    { "type": "text", "id": "subheading", "label": "Sous-titre (chiffres réels uniquement)" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" },
+    { "type": "text", "id": "note", "label": "Note sous le bouton" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Avis",
+      "settings": [
+        { "type": "range", "id": "stars", "label": "Étoiles", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text", "id": "title", "label": "Titre" },
+        { "type": "textarea", "id": "text", "label": "Avis (uniquement de vrais clients, avec leur accord)" },
+        { "type": "image_picker", "id": "image", "label": "Photo (facultative, avec l'accord du client)" },
+        { "type": "text", "id": "name", "label": "Prénom et initiale", "default": "Prénom N." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Avis clients" }]
+}
+{% endschema %}

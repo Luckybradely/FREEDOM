@@ -10,11 +10,48 @@
   {
     "name": "Couleurs",
     "settings": [
-      { "type": "color", "id": "color_bg", "label": "Fond", "default": "#FBF8F3" },
-      { "type": "color", "id": "color_text", "label": "Texte", "default": "#1F2A24" },
-      { "type": "color", "id": "color_accent", "label": "Couleur principale (boutons)", "default": "#2F5D4A" },
-      { "type": "color", "id": "color_accent_text", "label": "Texte sur boutons", "default": "#FFFFFF" },
-      { "type": "color", "id": "color_soft", "label": "Fond des blocs", "default": "#EEE7DA" }
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Fond",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Texte",
+        "default": "#111111"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Vert principal (boutons, titres en couleur)",
+        "default": "#2E4A18"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_text",
+        "label": "Texte sur boutons",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_soft",
+        "label": "Fond crème des sections",
+        "default": "#FAF6EE"
+      },
+      {
+        "type": "color",
+        "id": "color_dark",
+        "label": "Fond sombre (pied de page)",
+        "default": "#1E2A14"
+      },
+      {
+        "type": "color",
+        "id": "color_highlight",
+        "label": "Orange (étoiles, accents)",
+        "default": "#E58A2B"
+      }
     ]
   }
 ]

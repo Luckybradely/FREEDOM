@@ -1,12 +1,26 @@
 <header class="header">
   <div class="container header__inner">
-    <a class="header__logo" href="{{ routes.root_url }}">{{ shop.name }}</a>
-    <nav class="header__nav" aria-label="Navigation principale">
-      {% for link in linklists[section.settings.menu].links %}
-        <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
-      {% endfor %}
-      <a class="header__cart" href="{{ routes.cart_url }}">Panier ({{ cart.item_count }})</a>
-    </nav>
+    <details class="menu">
+      <summary aria-label="Menu">{% render 'icon', name: 'menu' %}</summary>
+      <nav class="menu__panel" aria-label="Navigation principale">
+        {% for link in linklists[section.settings.menu].links %}
+          <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+        {% endfor %}
+      </nav>
+    </details>
+
+    <a class="header__logo" href="{{ routes.root_url }}">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 400 | image_tag: alt: shop.name, class: 'header__logo-img' }}
+      {%- else -%}
+        {{ shop.name }}
+      {%- endif -%}
+    </a>
+
+    <a class="header__cart" href="{{ routes.cart_url }}" aria-label="Panier ({{ cart.item_count }})">
+      {% render 'icon', name: 'cart' %}
+      {% if cart.item_count > 0 %}<span class="header__badge">{{ cart.item_count }}</span>{% endif %}
+    </a>
   </div>
 </header>
 
@@ -14,7 +28,8 @@
 {
   "name": "En-tête",
   "settings": [
-    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" }
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (sinon le nom de la boutique)" }
   ]
 }
 {% endschema %}

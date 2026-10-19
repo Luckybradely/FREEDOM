@@ -1,0 +1,57 @@
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">{{ section.settings.heading }}</h2>
+    <p class="section__sub">{{ section.settings.subheading }}</p>
+
+    <div class="compare" role="table" aria-label="{{ section.settings.heading }}">
+      <div class="compare__row compare__row--head" role="row">
+        <span role="columnheader"></span>
+        <span class="compare__ours" role="columnheader">{{ section.settings.col_ours }}</span>
+        <span role="columnheader">{{ section.settings.col_2 }}</span>
+        <span role="columnheader">{{ section.settings.col_3 }}</span>
+      </div>
+      {% for block in section.blocks %}
+        <div class="compare__row" role="row" {{ block.shopify_attributes }}>
+          <strong role="rowheader">{{ block.settings.label }}</strong>
+          <span class="compare__ours" role="cell"><i class="mark mark--yes">{% render 'icon', name: 'check' %}</i>{{ block.settings.ours }}</span>
+          <span role="cell"><i class="mark mark--{{ block.settings.status_2 }}">{% if block.settings.status_2 == 'no' %}{% render 'icon', name: 'x' %}{% else %}{% render 'icon', name: 'minus' %}{% endif %}</i>{{ block.settings.other_2 }}</span>
+          <span role="cell"><i class="mark mark--{{ block.settings.status_3 }}">{% if block.settings.status_3 == 'no' %}{% render 'icon', name: 'x' %}{% else %}{% render 'icon', name: 'minus' %}{% endif %}</i>{{ block.settings.other_3 }}</span>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.button_label != blank %}
+      <p class="center"><a class="button button--big" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a></p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparatif",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Comment nous nous comparons" },
+    { "type": "text", "id": "subheading", "label": "Sous-titre", "default": "Tous les savons ne se valent pas." },
+    { "type": "text", "id": "col_ours", "label": "Colonne 1 (vous)", "default": "Notre savon" },
+    { "type": "text", "id": "col_2", "label": "Colonne 2", "default": "Savon bas de gamme" },
+    { "type": "text", "id": "col_3", "label": "Colonne 3", "default": "Savon classique" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Choisir le savon qui fonctionne" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Ligne",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Critère", "default": "Critère" },
+        { "type": "text", "id": "ours", "label": "Votre produit" },
+        { "type": "text", "id": "other_2", "label": "Colonne 2" },
+        { "type": "select", "id": "status_2", "label": "Colonne 2 : pastille", "default": "no", "options": [{ "value": "no", "label": "Croix" }, { "value": "partial", "label": "Tiret" }] },
+        { "type": "text", "id": "other_3", "label": "Colonne 3" },
+        { "type": "select", "id": "status_3", "label": "Colonne 3 : pastille", "default": "no", "options": [{ "value": "no", "label": "Croix" }, { "value": "partial", "label": "Tiret" }] }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Comparatif" }]
+}
+{% endschema %}

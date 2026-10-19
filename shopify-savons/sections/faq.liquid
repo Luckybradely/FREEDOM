@@ -1,12 +1,14 @@
-<section class="section section--soft">
-  <div class="container container--narrow">
-    <h2 class="section__title">{{ section.settings.heading }}</h2>
-    {% for block in section.blocks %}
-      <details class="faq" {{ block.shopify_attributes }}>
-        <summary>{{ block.settings.question }}</summary>
-        <p>{{ block.settings.answer }}</p>
-      </details>
-    {% endfor %}
+<section class="section">
+  <div class="container faq-wrap">
+    <h2>{{ section.settings.heading }}</h2>
+    <div>
+      {% for block in section.blocks %}
+        <details class="faq" {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question }}<span class="faq__plus">{% render 'icon', name: 'plus' %}</span></summary>
+          <p>{{ block.settings.answer }}</p>
+        </details>
+      {% endfor %}
+    </div>
   </div>
 </section>
 
@@ -14,7 +16,7 @@
 {
   "name": "Questions fréquentes",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Titre", "default": "Vos questions" }
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Questions fréquentes" }
   ],
   "blocks": [
     {

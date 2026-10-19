@@ -1,6 +1,47 @@
 {
   "sections": {
-    "main": { "type": "main-product", "settings": {} }
+    "main": { "type": "main-product", "settings": {} },
+    "steps": {
+      "type": "steps",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Remplacez votre savon", "text": "Utilisez-le à la place de votre savon ou gel douche habituel." } },
+        "s2": { "type": "step", "settings": { "title": "Douchez-vous comme d'habitude", "text": "Savonnez le cou, la poitrine et le dos, puis rincez." } },
+        "s3": { "type": "step", "settings": { "title": "Sentez la différence", "text": "À vous de juger dès les premières douches." } }
+      },
+      "block_order": ["s1", "s2", "s3"],
+      "settings": {}
+    },
+    "reviews": { "type": "testimonials", "settings": {} },
+    "feature": {
+      "type": "feature",
+      "settings": {
+        "heading": "Doux pour la peau,",
+        "heading_accent": "jamais agressif",
+        "text": "<p>Décrivez ici votre formule et pourquoi elle respecte la peau mature.</p>",
+        "soft": true
+      }
+    },
+    "compare": {
+      "type": "comparison",
+      "blocks": {
+        "r1": { "type": "row", "settings": { "label": "Neutralise les odeurs", "ours": "Formule ciblée", "other_2": "Parfum qui masque", "status_2": "no", "other_3": "Efficacité limitée", "status_3": "partial" } },
+        "r2": { "type": "row", "settings": { "label": "Respecte la peau mature", "ours": "Formule douce", "other_2": "Souvent desséchant", "status_2": "partial", "other_3": "Variable", "status_3": "partial" } },
+        "r3": { "type": "row", "settings": { "label": "Ingrédients clairs", "ours": "Liste complète affichée", "other_2": "Liste floue", "status_2": "no", "other_3": "Liste longue", "status_3": "partial" } }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": {}
+    },
+    "guarantee": { "type": "guarantee", "settings": {} },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "Quand verrai-je les premiers résultats ?", "answer": "À compléter avec une réponse honnête." } },
+        "q2": { "type": "question", "settings": { "question": "Combien de temps dure un savon ?", "answer": "À compléter selon l'usage réel de votre produit." } },
+        "q3": { "type": "question", "settings": { "question": "Est-ce que cela dessèche la peau ?", "answer": "À compléter selon votre formule." } }
+      },
+      "block_order": ["q1", "q2", "q3"],
+      "settings": {}
+    }
   },
-  "order": ["main"]
+  "order": ["main", "steps", "reviews", "feature", "compare", "guarantee", "faq"]
 }
