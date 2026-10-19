@@ -245,3 +245,5 @@ s { opacity: .6; font-weight: 400; font-size: .85em; }
   .trust { gap: .5rem; }
   .compare { margin-left: -1.25rem; margin-right: -1.25rem; padding: 0 1.25rem; }
 }
+
+.app-block { margin: 1rem 0; }

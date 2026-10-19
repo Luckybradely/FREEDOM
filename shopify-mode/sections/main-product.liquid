@@ -132,6 +132,8 @@
                   <summary>{{ block.settings.title }}{% render 'icon', name: 'chevron-down' %}</summary>
                   <div class="rte">{{ block.settings.content }}</div>
                 </details>
+              {% when '@app' %}
+                <div class="app-block">{% render block %}</div>
             {% endcase %}
           {% endfor %}
 
@@ -164,6 +166,7 @@
     { "type": "collection", "id": "together_collection", "label": "Collection « souvent achetés ensemble »" }
   ],
   "blocks": [
+    { "type": "@app" },
     {
       "type": "benefit",
       "name": "Avantage (icône)",

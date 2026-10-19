@@ -75,6 +75,10 @@
         </button>
       {% endform %}
 
+      {% for block in section.blocks %}
+        {% if block.type == '@app' %}<div class="app-block">{% render block %}</div>{% endif %}
+      {% endfor %}
+
       {% if section.settings.under_button != blank %}<p class="product__under">{{ section.settings.under_button }}</p>{% endif %}
       <div class="payment-icons">{{ shop.enabled_payment_types | payment_type_svg_tag: class: 'payment-icon' }}</div>
     </div>
@@ -113,6 +117,7 @@
     { "type": "text", "id": "trust_2", "label": "Texte 2", "default": "Satisfait ou remboursé" },
     { "type": "select", "id": "trust_icon_3", "label": "Icône 3", "default": "drop", "options": [{ "value": "clock", "label": "Horloge" }, { "value": "shield", "label": "Bouclier" }, { "value": "drop", "label": "Goutte" }, { "value": "leaf", "label": "Feuille" }, { "value": "heart", "label": "Cœur" }] },
     { "type": "text", "id": "trust_3", "label": "Texte 3", "default": "Doux pour la peau mature" }
-  ]
+  ],
+  "blocks": [{ "type": "@app" }]
 }
 {% endschema %}

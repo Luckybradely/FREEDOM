@@ -215,3 +215,5 @@ s { opacity: .55; font-size: .85em; margin-left: .3em; }
   .split { grid-template-columns: 1fr 1fr; }
   .footer__top { grid-template-columns: 2fr 1fr 1fr; }
 }
+
+.app-block { margin: 1rem 0; }
