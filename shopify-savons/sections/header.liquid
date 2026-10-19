@@ -1,0 +1,20 @@
+<header class="header">
+  <div class="container header__inner">
+    <a class="header__logo" href="{{ routes.root_url }}">{{ shop.name }}</a>
+    <nav class="header__nav" aria-label="Navigation principale">
+      {% for link in linklists[section.settings.menu].links %}
+        <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+      {% endfor %}
+      <a class="header__cart" href="{{ routes.cart_url }}">Panier ({{ cart.item_count }})</a>
+    </nav>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "En-tête",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" }
+  ]
+}
+{% endschema %}

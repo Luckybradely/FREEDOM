@@ -1,0 +1,12 @@
+<div class="announcement">
+  <p>{{ section.settings.text }}</p>
+</div>
+
+{% schema %}
+{
+  "name": "Bandeau d'annonce",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Texte", "default": "Livraison offerte dès 40 € d'achat" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,50 @@
+<section class="section">
+  <div class="container product">
+    <div class="product__media">
+      {% for media in product.media %}
+        {% if media.media_type == 'image' %}
+          {%- assign alt_text = media.alt | default: product.title -%}
+          {{ media | image_url: width: 900 | image_tag: loading: 'lazy', alt: alt_text }}
+        {% endif %}
+      {% else %}
+        <div class="card__placeholder" aria-hidden="true"></div>
+      {% endfor %}
+    </div>
+
+    <div class="product__info">
+      <h1>{{ product.title }}</h1>
+      <p class="product__price">{{ product.selected_or_first_available_variant.price | money }}</p>
+
+      {% form 'product', product %}
+        {% unless product.has_only_default_variant %}
+          <label for="variant">Choisissez une option</label>
+          <select id="variant" name="id">
+            {% for variant in product.variants %}
+              <option value="{{ variant.id }}"{% if variant == product.selected_or_first_available_variant %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>
+                {{ variant.title }} – {{ variant.price | money }}
+              </option>
+            {% endfor %}
+          </select>
+        {% else %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {% endunless %}
+
+        <label for="quantity">Quantité</label>
+        <input id="quantity" type="number" name="quantity" value="1" min="1">
+
+        <button class="button button--full" type="submit"{% unless product.selected_or_first_available_variant.available %} disabled{% endunless %}>
+          {% if product.selected_or_first_available_variant.available %}Ajouter au panier{% else %}Épuisé{% endif %}
+        </button>
+      {% endform %}
+
+      <div class="product__description rte">{{ product.description }}</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fiche produit",
+  "settings": []
+}
+{% endschema %}

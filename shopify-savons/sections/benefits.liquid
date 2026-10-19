@@ -1,0 +1,33 @@
+<section class="section section--soft">
+  <div class="container">
+    <h2 class="section__title">{{ section.settings.heading }}</h2>
+    <div class="grid grid--3">
+      {% for block in section.blocks %}
+        <div class="benefit" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Avantages",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Pourquoi ça marche" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Avantage",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Avantage" },
+        { "type": "textarea", "id": "text", "label": "Texte" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Avantages" }]
+}
+{% endschema %}

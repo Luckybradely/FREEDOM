@@ -1,0 +1,11 @@
+<a class="card" href="{{ product.url }}">
+  <div class="card__media">
+    {% if product.featured_media %}
+      {{ product.featured_media | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}
+    {% else %}
+      <div class="card__placeholder" aria-hidden="true"></div>
+    {% endif %}
+  </div>
+  <h3 class="card__title">{{ product.title }}</h3>
+  <p class="card__price">{{ product.price | money }}</p>
+</a>
