@@ -1,0 +1,5 @@
+Handle,Title,Body (HTML),Vendor,Product Category,Type,Tags,Published,Option1 Name,Option1 Value,Option2 Name,Option2 Value,Option3 Name,Option3 Value,Variant SKU,Variant Grams,Variant Inventory Tracker,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Compare At Price,Variant Requires Shipping,Variant Taxable,Variant Barcode,Image Src,Image Position,Image Alt Text,Gift Card,SEO Title,SEO Description,Variant Image,Variant Weight Unit,Status
+savon-peau-mature,Savon fraîcheur peau mature,"<p>À compléter : décrivez votre savon, son action et ses ingrédients.</p>",Votre marque,,Savon,best-seller,FALSE,Lot,1 savon,,,,,SAVON-1,110,,,deny,manual,12.90,,TRUE,TRUE,,,,,FALSE,,,,g,draft
+savon-peau-mature,,,,,,,,,2 savons,,,,,SAVON-2,220,,,deny,manual,23.90,25.80,TRUE,TRUE,,,,,,,,,g,
+savon-peau-mature,,,,,,,,,3 savons,,,,,SAVON-3,330,,,deny,manual,32.90,38.70,TRUE,TRUE,,,,,,,,,g,
+savon-peau-mature,,,,,,,,,6 savons,,,,,SAVON-6,660,,,deny,manual,59.90,77.40,TRUE,TRUE,,,,,,,,,g,

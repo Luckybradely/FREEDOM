@@ -1,0 +1,13 @@
+Handle,Title,Body (HTML),Vendor,Product Category,Type,Tags,Published,Option1 Name,Option1 Value,Option2 Name,Option2 Value,Option3 Name,Option3 Value,Variant SKU,Variant Grams,Variant Inventory Tracker,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Compare At Price,Variant Requires Shipping,Variant Taxable,Variant Barcode,Image Src,Image Position,Image Alt Text,Gift Card,SEO Title,SEO Description,Variant Image,Variant Weight Unit,Status
+collant-voile-double,Collant voile doublé,"<p>À compléter : description, composition, coupe.</p>",Votre marque,,Collants,best-seller,FALSE,Couleur,Noir,Taille,XS/S,,,COLLANT-NOI-XSS,80,,,deny,manual,29.90,,TRUE,TRUE,,,,,FALSE,,,,g,draft
+collant-voile-double,,,,,,,,,Noir,,S/M,,,COLLANT-NOI-SM,80,,,deny,manual,29.90,,TRUE,TRUE,,,,,,,,,g,
+collant-voile-double,,,,,,,,,Noir,,L/XL,,,COLLANT-NOI-LXL,80,,,deny,manual,29.90,,TRUE,TRUE,,,,,,,,,g,
+collant-voile-double,,,,,,,,,Noir,,XL/2XL,,,COLLANT-NOI-XL2XL,80,,,deny,manual,29.90,,TRUE,TRUE,,,,,,,,,g,
+collant-voile-double,,,,,,,,,Moka,,XS/S,,,COLLANT-MOK-XSS,80,,,deny,manual,29.90,,TRUE,TRUE,,,,,,,,,g,
+collant-voile-double,,,,,,,,,Moka,,S/M,,,COLLANT-MOK-SM,80,,,deny,manual,29.90,,TRUE,TRUE,,,,,,,,,g,
+collant-voile-double,,,,,,,,,Moka,,L/XL,,,COLLANT-MOK-LXL,80,,,deny,manual,29.90,,TRUE,TRUE,,,,,,,,,g,
+collant-voile-double,,,,,,,,,Moka,,XL/2XL,,,COLLANT-MOK-XL2XL,80,,,deny,manual,29.90,,TRUE,TRUE,,,,,,,,,g,
+collant-voile-double,,,,,,,,,Chair,,XS/S,,,COLLANT-CHA-XSS,80,,,deny,manual,29.90,,TRUE,TRUE,,,,,,,,,g,
+collant-voile-double,,,,,,,,,Chair,,S/M,,,COLLANT-CHA-SM,80,,,deny,manual,29.90,,TRUE,TRUE,,,,,,,,,g,
+collant-voile-double,,,,,,,,,Chair,,L/XL,,,COLLANT-CHA-LXL,80,,,deny,manual,29.90,,TRUE,TRUE,,,,,,,,,g,
+collant-voile-double,,,,,,,,,Chair,,XL/2XL,,,COLLANT-CHA-XL2XL,80,,,deny,manual,29.90,,TRUE,TRUE,,,,,,,,,g,

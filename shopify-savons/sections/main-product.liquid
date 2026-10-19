@@ -46,7 +46,9 @@
           <p class="divider"><span>{{ section.settings.bundle_title }}</span></p>
           <div class="bundles">
             {% for variant in product.variants %}
+              {%- comment -%} Nombre de savons : métachamp custom.units, sinon le chiffre en début de nom (« 3 savons » → 3). {%- endcomment -%}
               {%- assign units = variant.metafields.custom.units.value | plus: 0 -%}
+              {%- if units == 0 -%}{%- assign units = variant.title | split: ' ' | first | plus: 0 -%}{%- endif -%}
               {%- assign bonus = variant.metafields.custom.bonus.value -%}
               <label class="bundle">
                 <input type="radio" name="id" value="{{ variant.id }}"{% if variant == current %} checked{% endif %}{% unless variant.available %} disabled{% endunless %}>
@@ -133,7 +135,7 @@
 {
   "name": "Fiche produit",
   "settings": [
-    { "type": "paragraph", "content": "Métachamps de variante facultatifs : custom.units (nombre de savons, pour le prix par unité) et custom.bonus (texte du cadeau, ex. « + porte-savon offert »)." },
+    { "type": "paragraph", "content": "Prix par savon : calculé depuis le nom de la variante (« 3 savons ») ou le métachamp custom.units. Facultatif : métachamp custom.bonus (texte du cadeau, ex. « + porte-savon offert »)." },
     { "type": "text", "id": "rating_text", "label": "Ligne à côté des étoiles", "info": "N'affichez que des chiffres vrais." },
     { "type": "text", "id": "bundle_title", "label": "Titre des lots", "default": "PLUS VOUS EN PRENEZ, PLUS VOUS ÉCONOMISEZ" },
     { "type": "range", "id": "popular_index", "label": "Lot « le plus populaire » (position, 0 = aucun)", "min": 0, "max": 6, "step": 1, "default": 0 },
